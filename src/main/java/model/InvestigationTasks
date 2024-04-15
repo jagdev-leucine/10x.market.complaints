@@ -1,0 +1,110 @@
+package model;
+
+/**
+ * This class represents the InvestigationTasks entity.
+ */
+public class InvestigationTasks {
+    /**
+     * Represents the primary key of the InvestigationTasks entity.
+     */
+    private long id;
+    
+    /**
+     * Represents the name of the investigation task.
+     */
+    private String name;
+    
+    /**
+     * Represents the status of the investigation task.
+     */
+    private TaskStatus status;
+    
+    /**
+     * Represents the staff member assigned to the investigation task.
+     */
+    private StaffMember assignedStaff;
+
+    // Constructors, getters, and setters
+
+    /**
+     * Gets the id of the investigation task.
+     * @return The id of the investigation task.
+     */
+    public long getId() {
+        return id;
+    }
+
+    /**
+    * Sets the id of the investigation task.
+    * @param id The id of the investigation task.
+    */
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    /**
+     * Gets the name of the investigation task.
+     * @return The name of the investigation task.
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Sets the name of the investigation task.
+     * @param name The name of the investigation task.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Gets the status of the investigation task.
+     * @return The status of the investigation task.
+     */
+    public TaskStatus getStatus() {
+        return status;
+    }
+
+    /**
+     * Sets the status of the investigation task.
+     * @param status The status of the investigation task.
+     */
+    public void setStatus(TaskStatus status) {
+        this.status = status;
+    }
+
+    /**
+     * Gets the staff member assigned to the investigation task.
+     * @return The staff member assigned to the investigation task.
+     */
+    public StaffMember getAssignedStaff() {
+        return assignedStaff;
+    }
+
+    /**
+     * Sets the staff member assigned to the investigation task.
+     * @param assignedStaff The staff member assigned to the investigation task.
+     */
+    public void setAssignedStaff(StaffMember assignedStaff) {
+        this.assignedStaff = assignedStaff;
+    }
+    
+    // Other methods and enums as required
+}
+
+/**
+ * Represents the status of an investigation task.
+ */
+enum TaskStatus {
+    PENDING,
+    IN_PROGRESS,
+    COMPLETED
+}
+
+/**
+ * Represents a staff member.
+ */
+class StaffMember {
+    // attributes and methods specific to StaffMember
+}

@@ -1,0 +1,256 @@
+package model;
+
+import java.sql.Date;
+import java.sql.Timestamp;
+
+/**
+ * Represents an action within a Corrective and Preventive Action (CAPA) Plan.
+ * This class ties specific actions described in the CAPA plan to their respective CAPA plan,
+ * detailing the action's requirements, deadlines, status, and outcomes.
+ */
+public class CapaPlanActions {
+
+    /**
+     * The unique identifier for the CAPA plan action.
+     */
+    private int id;
+
+    /**
+     * A description of the required action.
+     */
+    private String actionDescription;
+
+    /**
+     * The deadline by which the action must be completed.
+     */
+    private Date deadline;
+
+    /**
+     * The current status of the action.
+     */
+    private ActionStatus status;
+
+    /**
+     * The staff member assigned to execute the action.
+     */
+    private String assignedStaffMember;
+
+    /**
+     * The expected outcome of completing the action.
+     */
+    private String expectedOutcome;
+
+    /**
+     * The date and time when the action was created.
+     */
+    private Timestamp creationDate;
+
+    /**
+     * The date and time when the action was last modified.
+     */
+    private Timestamp lastModifiedDate;
+
+    /**
+     * Additional notes related to the action.
+     */
+    private String notes;
+
+    /**
+     * The CAPA plan to which this action belongs.
+     */
+    private CapaPlans fkCapaPlanId;
+
+    /**
+     * Represents the possible statuses of CAPA Plan Actions.
+     */
+    public enum ActionStatus {
+        PLANNED,
+        IN_PROGRESS,
+        COMPLETED
+    }
+
+    // Constructors, Getters, and Setters
+
+    public CapaPlanActions() {
+    }
+
+    /**
+     * Gets the unique identifier for the action.
+     * 
+     * @return the action's unique identifier
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * Sets the unique identifier for the action.
+     * 
+     * @param id the unique identifier to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * Gets the description of the action.
+     * 
+     * @return the action's description
+     */
+    public String getActionDescription() {
+        return actionDescription;
+    }
+
+    /**
+     * Sets the description of the action.
+     * 
+     * @param actionDescription the description to set
+     */
+    public void setActionDescription(String actionDescription) {
+        this.actionDescription = actionDescription;
+    }
+
+    /**
+     * Gets the deadline for the action.
+     * 
+     * @return the action's deadline
+     */
+    public Date getDeadline() {
+        return deadline;
+    }
+
+    /**
+     * Sets the deadline for the action.
+     * 
+     * @param deadline the deadline to set
+     */
+    public void setDeadline(Date deadline) {
+        this.deadline = deadline;
+    }
+
+    /**
+     * Gets the current status of the action.
+     * 
+     * @return the action's current status
+     */
+    public ActionStatus getStatus() {
+        return status;
+    }
+
+    /**
+     * Sets the current status of the action.
+     * 
+     * @param status the status to set
+     */
+    public void setStatus(ActionStatus status) {
+        this.status = status;
+    }
+
+    /**
+     * Gets the staff member assigned to the action.
+     * 
+     * @return the assigned staff member's identifier
+     */
+    public String getAssignedStaffMember() {
+        return assignedStaffMember;
+    }
+
+    /**
+     * Sets the staff member assigned to the action.
+     * 
+     * @param assignedStaffMember the staff member to assign
+     */
+    public void setAssignedStaffMember(String assignedStaffMember) {
+        this.assignedStaffMember = assignedStaffMember;
+    }
+
+    /**
+     * Gets the expected outcome of the action.
+     * 
+     * @return the expected outcome
+     */
+    public String getExpectedOutcome() {
+        return expectedOutcome;
+    }
+
+    /**
+     * Sets the expected outcome of the action.
+     * 
+     * @param expectedOutcome the expected outcome to set
+     */
+    public void setExpectedOutcome(String expectedOutcome) {
+        this.expectedOutcome = expectedOutcome;
+    }
+
+    /**
+     * Gets the creation date of the action.
+     * 
+     * @return the action's creation date
+     */
+    public Timestamp getCreationDate() {
+        return creationDate;
+    }
+
+    /**
+     * Sets the creation date of the action.
+     * 
+     * @param creationDate the creation date to set
+     */
+    public void setCreationDate(Timestamp creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    /**
+     * Gets the last modified date of the action.
+     * 
+     * @return the action's last modified date
+     */
+    public Timestamp getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+
+    /**
+     * Sets the last modified date of the action.
+     * 
+     * @param lastModifiedDate the last modified date to set
+     */
+    public void setLastModifiedDate(Timestamp lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+    }
+
+    /**
+     * Gets additional notes related to the action.
+     * 
+     * @return the notes
+     */
+    public String getNotes() {
+        return notes;
+    }
+
+    /**
+     * Sets additional notes related to the action.
+     * 
+     * @param notes the notes to set
+     */
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    /**
+     * Gets the CAPA plan this action is associated with.
+     * 
+     * @return the associated CAPA plan
+     */
+    public CapaPlans getFkCapaPlanId() {
+        return fkCapaPlanId;
+    }
+
+    /**
+     * Sets the CAPA plan this action is associated with.
+     * 
+     * @param fkCapaPlanId the CAPA plan to associate
+     */
+    public void setFkCapaPlanId(CapaPlans fkCapaPlanId) {
+        this.fkCapaPlanId = fkCapaPlanId;
+    }
+}

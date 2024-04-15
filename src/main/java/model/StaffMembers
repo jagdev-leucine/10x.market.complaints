@@ -1,0 +1,54 @@
+package model;
+
+/**
+ * This class represents the StaffMembers entity.
+ */
+public class StaffMembers {
+    /**
+     * Represents the unique identifier for a staff member.
+     */
+    private int id;
+    
+    /**
+     * Represents the name of the staff member.
+     */
+    private String name;
+    
+    /**
+     * Represents the role of the staff member.
+     */
+    private StaffRole role;
+    
+    /**
+     * Represents the department the staff member belongs to.
+     */
+    private Department department;
+    
+    // Constructors, getters, and setters
+
+    /**
+     * Enum representing the role of the staff member.
+     */
+    public enum StaffRole {
+        ROLE_1,
+        ROLE_2,
+        ROLE_3
+    }
+    
+    /**
+     * Represents the department the staff member belongs to.
+     */
+    public class Department {
+        /**
+         * Represents the unique identifier for a department.
+         */
+        private int id;
+        
+        /**
+         * Represents the name of the department.
+         */
+        private String name;
+        
+        // Constructors, getters, and setters
+    }
+}

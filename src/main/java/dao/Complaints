@@ -1,0 +1,251 @@
+package dao;
+
+
+import model.Complaints;
+import utils.DatabaseUtility;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import model.ComplaintType;
+
+
+public class ComplaintsDAO {
+
+
+/**
+ * Inserts a new Complaint record into the database.
+ * @param complaint The Complaint object to insert.
+ */
+public void createComplaint(Complaints complaint) {
+    Connection conn = null;
+    PreparedStatement pstmt = null;
+    String sql = "INSERT INTO complaints (description, type, submittedBy) VALUES (?, ?, ?)";
+    try {
+        conn = DatabaseUtility.connect();
+        pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        pstmt.setString(1, complaint.getDescription());
+        pstmt.setString(2, complaint.getType().toString());
+        pstmt.setLong(3, complaint.getSubmittedBy().getId());
+        
+        int affectedRows = pstmt.executeUpdate();
+        if (affectedRows == 0) {
+            throw new SQLException("Creating complaint failed, no rows affected.");
+        }
+        try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
+            if (generatedKeys.next()) {
+                complaint.setId(generatedKeys.getLong(1));
+            } else {
+                throw new SQLException("Creating complaint failed, no ID obtained.");
+            }
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(ComplaintsDAO.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+        DatabaseUtility.disconnect(conn);
+        if (pstmt != null) {
+            try {
+                pstmt.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ComplaintsDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+}
+
+/**
+ * Retrieves a Complaint record by its unique identifier.
+ * @param id The unique identifier for the complaint.
+ * @return A Complaint object if found, null otherwise.
+ */
+public Complaints getComplaintById(long id) {
+    Connection conn = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
+    Complaints complaint = null;
+    try {
+        conn = DatabaseUtility.connect();
+        String sql = "SELECT * FROM complaints WHERE id = ?";
+        preparedStatement = conn.prepareStatement(sql);
+        preparedStatement.setLong(1, id);
+        resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            complaint = new Complaints();
+            complaint.setId(resultSet.getLong("id"));
+            complaint.setDescription(resultSet.getString("description"));
+            // Assuming the existence of fields in the Complaints model for demonstration
+            // complaint.setType(ComplaintType.valueOf(resultSet.getString("type")));
+            // complaint.setSubmittedBy(...); // Needs involved retrieval logic
+            // Set other fields
+        }
+    } catch (SQLException e) {
+        Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
+    } finally {
+        DatabaseUtility.disconnect(conn);
+        if (preparedStatement != null) {
+            try {
+                preparedStatement.close();
+            } catch (SQLException e) {
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
+            }
+        }
+        if (resultSet != null) {
+            try {
+                resultSet.close();
+            } catch (SQLException e) {
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
+            }
+        }
+    }
+    return complaint;
+}
+
+/**
+ * Updates an existing Complaint record in the database.
+ * @param complaint The complaint to update.
+ */
+public void updateComplaint(Complaints complaint) {
+    Connection conn = DatabaseUtility.connect();
+    String sql = "UPDATE complaints SET description = ?, type = ?, submitted_by = ?, investigation_details = ? WHERE id = ?;";
+
+    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        pstmt.setString(1, complaint.getDescription());
+        pstmt.setString(2, complaint.getType().toString());
+        // Assuming StaffMember ID and InvestigationDetails ID are stored as long in Complaints
+        pstmt.setLong(3, complaint.getSubmittedBy().getId());
+        pstmt.setLong(4, complaint.getInvestigationDetails().getId());
+        pstmt.setLong(5, complaint.getId());
+
+        int affectedRows = pstmt.executeUpdate();
+        if (affectedRows > 0) {
+            System.out.println("Complaint updated successfully.");
+        } else {
+            System.out.println("A problem occurred. No rows affected.");
+        }
+    } catch (SQLException e) {
+        Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
+    } finally {
+        DatabaseUtility.disconnect(conn);
+    }
+}
+
+/**
+ * Deletes a Complaint record from the database based on its unique identifier.
+ * @param id The unique identifier of the complaint to be deleted.
+ */
+public void deleteComplaint(long id) {
+    Connection conn = null;
+    PreparedStatement pstmt = null;
+    String sql = "DELETE FROM complaints WHERE id = ?;";
+    try {
+        conn = DatabaseUtility.connect();
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setLong(1, id);
+        int affectedRows = pstmt.executeUpdate();
+        if (affectedRows > 0) {
+            Logger.getLogger(ComplaintsDAO.class.getName()).log(Level.INFO, "Complaint with ID " + id + " was successfully deleted.");
+        } else {
+            Logger.getLogger(ComplaintsDAO.class.getName()).log(Level.WARNING, "No Complaint found with ID " + id + ".");
+        }
+    } catch (SQLException e) {
+        Logger.getLogger(ComplaintsDAO.class.getName()).log(Level.SEVERE, "Error deleting Complaint with ID " + id, e);
+    } finally {
+        DatabaseUtility.disconnect(conn);
+        if (pstmt != null) {
+            try {
+                pstmt.close();
+            } catch (SQLException e) {
+                Logger.getLogger(ComplaintsDAO.class.getName()).log(Level.SEVERE, null, e);
+            }
+        }
+    }
+}
+
+/**
+ * Retrieves all Complaint records from the database.
+ * @return A list of Complaints.
+ */
+public List<Complaints> getAllComplaints() {
+    List<Complaints> complaintsList = new ArrayList<>();
+    Connection conn = DatabaseUtility.connect();
+    String sql = "SELECT * FROM complaints";
+    try (Statement stmt = conn.createStatement();
+         ResultSet rs = stmt.executeQuery(sql)) {
+        while (rs.next()) {
+            Complaints complaint = new Complaints();
+            complaint.setId(rs.getLong("id"));
+            complaint.setDescription(rs.getString("description"));
+            // Assuming there's a method to convert from string to enum for type
+            complaint.setType(ComplaintType.valueOf(rs.getString("type")));
+            // Set more fields accordingly
+            complaintsList.add(complaint);
+        }
+    } catch (SQLException e) {
+        Logger.getLogger(ComplaintsDAO.class.getName()).log(Level.SEVERE, null, e);
+    } finally {
+        DatabaseUtility.disconnect(conn);
+    }
+    return complaintsList;
+}
+
+/**
+ * Retrieves all Complaint records of a specified type.
+ * @param type The type of the complaints to retrieve.
+ * @return A list of complaints of the specified type.
+ */
+public List<Complaints> getComplaintsByType(ComplaintType type) {
+    List<Complaints> complaints = new ArrayList<>();
+    Connection conn = DatabaseUtility.connect();
+    String sql = "SELECT * FROM complaints WHERE type = ?";
+    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        pstmt.setString(1, type.toString());
+        ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+            Complaints complaint = new Complaints();
+            complaint.setId(rs.getLong("id"));
+            complaint.setDescription(rs.getString("description"));
+            complaint.setType(ComplaintType.valueOf(rs.getString("type")));
+            complaints.add(complaint);
+        }
+    } catch (SQLException e) {
+        Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
+    } finally {
+        DatabaseUtility.disconnect(conn);
+    }
+    return complaints;
+}
+
+/**
+ * Retrieves all Complaint records submitted by a specific staff member.
+ * @param staffMemberId The unique identifier of the staff member.
+ * @return A list of Complaints submitted by the specified staff member.
+ */
+public List<Complaints> getComplaintsByStaffMember(long staffMemberId) {
+    List<Complaints> complaintsList = new ArrayList<>();
+    Connection conn = DatabaseUtility.connect();
+    String sql = "SELECT * FROM complaints WHERE submitted_by = ?;";
+    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        pstmt.setLong(1, staffMemberId);
+        ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+            Complaints complaint = new Complaints();
+            complaint.setId(rs.getLong("id"));
+            complaint.setDescription(rs.getString("description"));
+            // Assuming ComplaintType is an enum with a method to get value by string
+            complaint.setType(ComplaintType.valueOf(rs.getString("type")));
+            // Additional fields can be set here
+            complaintsList.add(complaint);
+        }
+    } catch (SQLException e) {
+        Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
+    } finally {
+        DatabaseUtility.disconnect(conn);
+    }
+    return complaintsList;
+}
+}

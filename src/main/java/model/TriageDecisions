@@ -1,0 +1,73 @@
+package model;
+
+/**
+ * Represents Triage Decisions entity.
+ */
+public class TriageDecisions {
+
+    /**
+     * Enum representing the type of Triage Decision.
+     */
+    public enum TriageType {
+        LOW, MEDIUM, HIGH
+    }
+
+    private Long id; // Unique identifier for Triage Decision
+
+    private TriageType decisionType; // Type of Triage Decision
+
+    private AssessmentRequests assessmentRequest; // Associated Assessment Request
+
+    // Other attributes and their respective subobjects can be added here
+
+    /**
+     * Retrieves the unique identifier for Triage Decision.
+     * @return The id of the Triage Decision.
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * Sets the unique identifier for Triage Decision.
+     * @param id The id of the Triage Decision to set.
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * Retrieves the type of Triage Decision.
+     * @return The TriageType of the Triage Decision.
+     */
+    public TriageType getDecisionType() {
+        return decisionType;
+    }
+
+    /**
+     * Sets the type of Triage Decision.
+     * @param decisionType The TriageType of the Triage Decision to set.
+     */
+    public void setDecisionType(TriageType decisionType) {
+        this.decisionType = decisionType;
+    }
+
+    /**
+     * Retrieves the associated Assessment Request of the Triage Decision.
+     * @return The AssessmentRequests object associated with the Triage Decision.
+     */
+    public AssessmentRequests getAssessmentRequest() {
+        return assessmentRequest;
+    }
+
+    /**
+     * Sets the associated Assessment Request of the Triage Decision.
+     * @param assessmentRequest The AssessmentRequests object to associate with the Triage Decision.
+     */
+    public void setAssessmentRequest(AssessmentRequests assessmentRequest) {
+        this.assessmentRequest = assessmentRequest;
+    }
+
+    // Other getter and setter methods and Javadoc comments can be added here for additional attributes
+
+}

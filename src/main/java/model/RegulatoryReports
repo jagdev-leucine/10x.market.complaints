@@ -1,0 +1,89 @@
+package model;
+
+/**
+ * Entity class representing the RegulatoryReports table.
+ */
+public class RegulatoryReports {
+    /**
+     * The unique identifier for the regulatory report.
+     */
+    private Long id;
+
+    /**
+     * The name of the regulatory report.
+     */
+    private String reportName;
+
+    /**
+     * The type of the regulatory report.
+     */
+    private ReportType reportType;
+
+    /**
+     * The date when the regulatory report was filed.
+     */
+    private Date filingDate;
+
+    /**
+     * The staff member who authored the regulatory report.
+     */
+    private StaffMember author;
+
+    // Getters and setters with comments omitted for brevity
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getReportName() {
+        return reportName;
+    }
+
+    public void setReportName(String reportName) {
+        this.reportName = reportName;
+    }
+
+    public ReportType getReportType() {
+        return reportType;
+    }
+
+    public void setReportType(ReportType reportType) {
+        this.reportType = reportType;
+    }
+
+    public Date getFilingDate() {
+        return filingDate;
+    }
+
+    public void setFilingDate(Date filingDate) {
+        this.filingDate = filingDate;
+    }
+
+    public StaffMember getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(StaffMember author) {
+        this.author = author;
+    }
+
+    /**
+     * Enum representing the types of regulatory reports.
+     */
+    public enum ReportType {
+        TYPE1,
+        TYPE2,
+        TYPE3
+    }
+
+    /**
+     * Class representing a staff member in the system.
+     */
+    public class StaffMember {
+        // Attributes and methods related to StaffMember.
+    }
+}

@@ -1,0 +1,50 @@
+package model;
+
+import java.sql.Date;
+
+/**
+ * Represents a Corrective and Preventive Action (CAPA) Plan within the system.
+ * This class contains various attributes defining a CAPA Plan including the action description,
+ * responsible person or team, due date, status, and related investigation details.
+ */
+public class CapaPlans {
+
+    /**
+     * A unique identifier for each CAPA Plan. Acts as the primary key within the database.
+     */
+    private int id;
+
+    /**
+     * Describes the corrective or preventive action to be taken.
+     */
+    private String actionDescription;
+
+    /**
+     * Identifies the individual or team responsible for implementing the CAPA plan.
+     */
+    private String responsiblePersonOrTeam;
+
+    /**
+     * The deadline by which the CAPA plan action must be completed.
+     */
+    private Date dueDate;
+
+    /**
+     * Reflects the current status of the CAPA plan.
+     */
+    private String status;
+
+    /**
+     * The date and time when the CAPA plan was created.
+     */
+    private java.sql.Timestamp creationDate;
+
+    /**
+     * The foreign key to 'investigation_details'. Ensures that each CAPA plan is directly linked
+     * to a specific set of investigation findings for a given complaint.
+     */
+    private InvestigationDetails fkInvestigationDetailsId;
+
+    // Constructors, getters, and setters not shown for brevity
+
+}

@@ -1,0 +1,127 @@
+package model;
+
+/**
+ * This class represents the entity for product information.
+ */
+public class ProductInformation {
+    
+    /**
+     * Enumeration for the type of product.
+     */
+    public enum ProductType {
+        TYPE_A,
+        TYPE_B,
+        TYPE_C
+    }
+    
+    /**
+     * Enumeration for the status of the product.
+     */
+    public enum ProductStatus {
+        ACTIVE,
+        INACTIVE
+    }
+    
+    private Long productId;
+    private String productName;
+    private ProductType productType;
+    private Double price;
+    private ProductStatus status;
+    private Manufacturer manufacturer;
+
+    /**
+     * Returns the unique identifier of the product.
+     * @return The product ID.
+     */
+    public Long getProductId() {
+        return productId;
+    }
+
+    /**
+     * Sets the unique identifier of the product.
+     * @param productId The product ID to set.
+     */
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
+    /**
+     * Returns the name of the product.
+     * @return The product name.
+     */
+    public String getProductName() {
+        return productName;
+    }
+
+    /**
+     * Sets the name of the product.
+     * @param productName The product name to set.
+     */
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    /**
+     * Returns the type of the product.
+     * @return The product type.
+     */
+    public ProductType getProductType() {
+        return productType;
+    }
+
+    /**
+     * Sets the type of the product.
+     * @param productType The product type to set.
+     */
+    public void setProductType(ProductType productType) {
+        this.productType = productType;
+    }
+
+    /**
+     * Returns the price of the product.
+     * @return The product price.
+     */
+    public Double getPrice() {
+        return price;
+    }
+
+    /**
+     * Sets the price of the product.
+     * @param price The product price to set.
+     */
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    /**
+     * Returns the status of the product.
+     * @return The product status.
+     */
+    public ProductStatus getStatus() {
+        return status;
+    }
+
+    /**
+     * Sets the status of the product.
+     * @param status The product status to set.
+     */
+    public void setStatus(ProductStatus status) {
+        this.status = status;
+    }
+
+    /**
+     * Returns the manufacturer of the product.
+     * @return The manufacturer details.
+     */
+    public Manufacturer getManufacturer() {
+        return manufacturer;
+    }
+
+    /**
+     * Sets the manufacturer of the product.
+     * @param manufacturer The manufacturer details to set.
+     */
+    public void setManufacturer(Manufacturer manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+}

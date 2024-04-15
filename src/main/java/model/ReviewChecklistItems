@@ -1,0 +1,84 @@
+package model;
+
+/**
+ * ReviewChecklistItems class represents the entity for review checklist items.
+ */
+public class ReviewChecklistItems {
+
+    /**
+     * Enum representing the status of the review checklist item.
+     */
+    public enum ChecklistItemStatus {
+        PENDING,
+        COMPLETED
+    }
+
+    private Long id;
+    private String checklistItemName;
+    private ChecklistItemStatus status;
+    private AssessmentRequests assessmentRequest;
+
+    /**
+     * Gets the ID of the review checklist item.
+     * @return The ID of the review checklist item.
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * Sets the ID of the review checklist item.
+     * @param id The ID of the review checklist item.
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * Gets the name of the checklist item.
+     * @return The name of the checklist item.
+     */
+    public String getChecklistItemName() {
+        return checklistItemName;
+    }
+
+    /**
+     * Sets the name of the checklist item.
+     * @param checklistItemName The name of the checklist item.
+     */
+    public void setChecklistItemName(String checklistItemName) {
+        this.checklistItemName = checklistItemName;
+    }
+
+    /**
+     * Gets the status of the review checklist item.
+     * @return The status of the review checklist item.
+     */
+    public ChecklistItemStatus getStatus() {
+        return status;
+    }
+
+    /**
+     * Sets the status of the review checklist item.
+     * @param status The status of the review checklist item.
+     */
+    public void setStatus(ChecklistItemStatus status) {
+        this.status = status;
+    }
+
+    /**
+     * Gets the assessment request associated with the review checklist item.
+     * @return The assessment request associated with the review checklist item.
+     */
+    public AssessmentRequests getAssessmentRequest() {
+        return assessmentRequest;
+    }
+
+    /**
+     * Sets the assessment request associated with the review checklist item.
+     * @param assessmentRequest The assessment request associated with the review checklist item.
+     */
+    public void setAssessmentRequest(AssessmentRequests assessmentRequest) {
+        this.assessmentRequest = assessmentRequest;
+    }
+}

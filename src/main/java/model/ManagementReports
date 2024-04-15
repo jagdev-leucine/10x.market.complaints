@@ -1,0 +1,56 @@
+package model;
+
+/**
+ * This class represents the management_reports entity.
+ */
+public class ManagementReports {
+
+    /**
+     * Enum representing the type of management report.
+     */
+    public enum ReportType {
+        FINANCIAL, OPERATIONAL, COMPLIANCE
+    }
+
+    private Long id; // Unique identifier for the management report
+    private String title; // Title of the management report
+    private ReportType reportType; // Type of the management report
+    private StaffMembers createdBy; // Staff member who created the report
+    private EvaluationDecisions evaluationDecision; // The decision made upon evaluation
+    private InvestigationDetails investigationDetails; // Details of the investigation
+
+    /**
+     * Get the unique identifier for the management report.
+     * @return The id of the management report.
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * Set the unique identifier for the management report.
+     * @param id The id of the management report.
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * Get the title of the management report.
+     * @return The title of the management report.
+     */
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * Set the title of the management report.
+     * @param title The title of the management report.
+     */
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    // Getters and setters for other attributes and subobjects
+
+}

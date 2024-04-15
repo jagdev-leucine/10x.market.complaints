@@ -1,0 +1,23 @@
+package model;
+
+/**
+ * This class represents a preliminary assessment note entity.
+ */
+public class PreliminaryAssessmentNotes {
+    private Long id;
+
+    /**
+     * The associated assessment request for this preliminary assessment note.
+     */
+    private AssessmentRequests assessmentRequests;
+
+    private String noteText;
+
+    // Constructors
+
+    // Getters and setters
+
+    // Other methods
+
+    // Inner classes or enums if needed
+}

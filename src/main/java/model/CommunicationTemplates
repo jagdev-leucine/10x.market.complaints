@@ -1,0 +1,109 @@
+package model;
+
+/**
+ * This class represents the CommunicationTemplates entity.
+ * It is used to store the communication templates for communications.
+ */
+public class CommunicationTemplates {
+    
+    /** The unique identifier for the communication template. */
+    private long id;
+    
+    /** The type of communication template. */
+    private CommunicationTemplateType type;
+    
+    /** The subject of the communication template. */
+    private String subject;
+    
+    /** The body of the communication template. */
+    private String body;
+    
+    /** 
+     * Constructs a CommunicationTemplates object with the specified id, type, subject, and body.
+     * @param id The unique identifier for the communication template.
+     * @param type The type of communication template.
+     * @param subject The subject of the communication template.
+     * @param body The body of the communication template.
+     */
+    public CommunicationTemplates(long id, CommunicationTemplateType type, String subject, String body) {
+        this.id = id;
+        this.type = type;
+        this.subject = subject;
+        this.body = body;
+    }
+    
+    // Getters and setters for the attributes
+
+    /**
+     * Gets the unique identifier for the communication template.
+     * @return The unique identifier.
+     */
+    public long getId() {
+        return id;
+    }
+
+    /**
+     * Sets the unique identifier for the communication template.
+     * @param id The unique identifier to set.
+     */
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    /**
+     * Gets the type of communication template.
+     * @return The type of communication template.
+     */
+    public CommunicationTemplateType getType() {
+        return type;
+    }
+
+    /**
+     * Sets the type of communication template.
+     * @param type The type of communication template to set.
+     */
+    public void setType(CommunicationTemplateType type) {
+        this.type = type;
+    }
+
+    /**
+     * Gets the subject of the communication template.
+     * @return The subject of the communication template.
+     */
+    public String getSubject() {
+        return subject;
+    }
+
+    /**
+     * Sets the subject of the communication template.
+     * @param subject The subject of the communication template to set.
+     */
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    /**
+     * Gets the body of the communication template.
+     * @return The body of the communication template.
+     */
+    public String getBody() {
+        return body;
+    }
+
+    /**
+     * Sets the body of the communication template.
+     * @param body The body of the communication template to set.
+     */
+    public void setBody(String body) {
+        this.body = body;
+    }
+}
+
+/**
+ * Represents the types of communication templates.
+ */
+enum CommunicationTemplateType {
+    EMAIL,
+    LETTER,
+    SMS
+}

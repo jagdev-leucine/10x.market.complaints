@@ -1,0 +1,75 @@
+package model;
+
+/**
+ * InitialAssessmentNotes entity
+ */
+public class InitialAssessmentNotes {
+    private Long id;
+    private String note;
+    private StaffMember staffMember;
+    private AssessmentRequest assessmentRequest;
+
+    /**
+     * Get the id of the initial assessment note
+     * @return The id of the initial assessment note
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * Set the id of the initial assessment note
+     * @param id The id of the initial assessment note
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * Get the note of the initial assessment note
+     * @return The note of the initial assessment note
+     */
+    public String getNote() {
+        return note;
+    }
+
+    /**
+     * Set the note of the initial assessment note
+     * @param note The note of the initial assessment note
+     */
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    /**
+     * Get the staff member associated with the initial assessment note
+     * @return The staff member associated with the initial assessment note
+     */
+    public StaffMember getStaffMember() {
+        return staffMember;
+    }
+
+    /**
+     * Set the staff member associated with the initial assessment note
+     * @param staffMember The staff member associated with the initial assessment note
+     */
+    public void setStaffMember(StaffMember staffMember) {
+        this.staffMember = staffMember;
+    }
+
+    /**
+     * Get the assessment request associated with the initial assessment note
+     * @return The assessment request associated with the initial assessment note
+     */
+    public AssessmentRequest getAssessmentRequest() {
+        return assessmentRequest;
+    }
+
+    /**
+     * Set the assessment request associated with the initial assessment note
+     * @param assessmentRequest The assessment request associated with the initial assessment note
+     */
+    public void setAssessmentRequest(AssessmentRequest assessmentRequest) {
+        this.assessmentRequest = assessmentRequest;
+    }
+}

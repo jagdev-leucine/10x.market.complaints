@@ -1,0 +1,133 @@
+package model;
+
+import java.util.Date;
+
+/**
+ * Represents a closure confirmation related to a specific complaint within the system.
+ * This class is used to record the final confirmation details when closing a complaint,
+ * including whether all necessary actions have been completed and documented.
+ */
+public class ClosureConfirmations {
+
+    /**
+     * Unique identifier for each closure confirmation record.
+     */
+    private int id;
+
+    /**
+     * Date when the complaint was officially confirmed as closed.
+     */
+    private Date confirmationDate;
+
+    /**
+     * Optional comments provided by QA staff detailing reasons for complaint closure.
+     */
+    private String closureComments;
+
+    /**
+     * Final status of the complaint indicating closure.
+     */
+    private ComplaintStatuses closureStatus;
+
+    /**
+     * Reference to the complaint this closure confirmation is associated with.
+     */
+    private Complaints fkComplaintId;
+
+    /**
+     * Gets the unique identifier for the closure confirmation record.
+     *
+     * @return the unique identifier.
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * Sets the unique identifier for the closure confirmation record.
+     *
+     * @param id the unique identifier to set.
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * Gets the date when the complaint was officially confirmed as closed.
+     *
+     * @return the confirmation date.
+     */
+    public Date getConfirmationDate() {
+        return confirmationDate;
+    }
+
+    /**
+     * Sets the date when the complaint was officially confirmed as closed.
+     *
+     * @param confirmationDate the confirmation date to set.
+     */
+    public void setConfirmationDate(Date confirmationDate) {
+        this.confirmationDate = confirmationDate;
+    }
+
+    /**
+     * Gets the optional comments provided by QA staff detailing reasons for complaint closure.
+     *
+     * @return the closure comments.
+     */
+    public String getClosureComments() {
+        return closureComments;
+    }
+
+    /**
+     * Sets the optional comments provided by QA staff detailing reasons for complaint closure.
+     *
+     * @param closureComments the closure comments to set.
+     */
+    public void setClosureComments(String closureComments) {
+        this.closureComments = closureComments;
+    }
+
+    /**
+     * Gets the final status of the complaint indicating closure.
+     *
+     * @return the closure status.
+     */
+    public ComplaintStatuses getClosureStatus() {
+        return closureStatus;
+    }
+
+    /**
+     * Sets the final status of the complaint indicating closure.
+     *
+     * @param closureStatus the closure status to set.
+     */
+    public void setClosureStatus(ComplaintStatuses closureStatus) {
+        this.closureStatus = closureStatus;
+    }
+
+    /**
+     * Gets the reference to the complaint this closure confirmation is associated with.
+     *
+     * @return the associated complaint.
+     */
+    public Complaints getFkComplaintId() {
+        return fkComplaintId;
+    }
+
+    /**
+     * Sets the reference to the complaint this closure confirmation is associated with.
+     *
+     * @param fkComplaintId the associated complaint to set.
+     */
+    public void setFkComplaintId(Complaints fkComplaintId) {
+        this.fkComplaintId = fkComplaintId;
+    }
+
+    /**
+     * Enumeration for Complaint Statuses showcasing the possible states a complaint can have upon closure.
+     */
+    public enum ComplaintStatuses {
+        PENDING, RECEIVED, NOT_RECEIVED
+    }
+}

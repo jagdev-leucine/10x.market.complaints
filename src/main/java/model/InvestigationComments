@@ -1,0 +1,75 @@
+package model;
+
+/**
+ * Represents the InvestigationComments entity.
+ */
+public class InvestigationComments {
+    private Long id;
+    private String comment;
+    private StaffMembers createdBy;
+    private InvestigationDetails investigation;
+
+    /**
+     * Returns the ID of the investigation comment.
+     * @return The ID of the investigation comment.
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * Sets the ID of the investigation comment.
+     * @param id The ID of the investigation comment.
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * Returns the comment content.
+     * @return The comment content.
+     */
+    public String getComment() {
+        return comment;
+    }
+
+    /**
+     * Sets the comment content.
+     * @param comment The comment content.
+     */
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    /**
+     * Returns the staff member who created the comment.
+     * @return The staff member who created the comment.
+     */
+    public StaffMembers getCreatedBy() {
+        return createdBy;
+    }
+
+    /**
+     * Sets the staff member who created the comment.
+     * @param createdBy The staff member who created the comment.
+     */
+    public void setCreatedBy(StaffMembers createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    /**
+     * Returns the investigation details related to this comment.
+     * @return The investigation details related to this comment.
+     */
+    public InvestigationDetails getInvestigation() {
+        return investigation;
+    }
+
+    /**
+     * Sets the investigation details related to this comment.
+     * @param investigation The investigation details related to this comment.
+     */
+    public void setInvestigation(InvestigationDetails investigation) {
+        this.investigation = investigation;
+    }
+}

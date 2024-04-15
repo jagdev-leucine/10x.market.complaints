@@ -1,0 +1,152 @@
+package model;
+
+import java.sql.Timestamp;
+
+/**
+ * Represents communication records with complainants, including details about the method, status,
+ * and content of the communication. This class models the structure and relationship of
+ * communication records stored within the system, aiding in the tracking and analysis of
+ * interactions between staff members and complainants.
+ */
+public class CommunicationRecords {
+
+    /**
+     * The unique identifier for each communication record.
+     */
+    private Long id;
+
+    /**
+     * The timestamp indicating when the communication was sent.
+     */
+    private Timestamp sendDate;
+
+    /**
+     * The recipient's contact information, such as an email address or phone number.
+     */
+    private String recipient;
+
+    /**
+     * A brief summary or the actual content of the communication message.
+     */
+    private String messageSummary;
+
+    /**
+     * The status of the communication attempt (e.g., Sent, Failed, Pending).
+     */
+    private String status;
+
+    /**
+     * The complainant's preferred method of communication, derived from predefined values.
+     */
+    private String preferredContactMethod;
+
+    /**
+     * Gets the unique identifier for this communication record.
+     * 
+     * @return The unique identifier for this communication record.
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * Sets the unique identifier for this communication record.
+     * 
+     * @param id The unique identifier for this communication record.
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * Gets the timestamp indicating when the communication was sent.
+     * 
+     * @return The timestamp indicating when the communication was sent.
+     */
+    public Timestamp getSendDate() {
+        return sendDate;
+    }
+
+    /**
+     * Sets the timestamp indicating when the communication was sent.
+     * 
+     * @param sendDate The timestamp indicating when the communication was sent.
+     */
+    public void setSendDate(Timestamp sendDate) {
+        this.sendDate = sendDate;
+    }
+
+    /**
+     * Gets the recipient's contact information for the communication.
+     * 
+     * @return The recipient's contact information.
+     */
+    public String getRecipient() {
+        return recipient;
+    }
+
+    /**
+     * Sets the recipient's contact information for the communication.
+     * 
+     * @param recipient The recipient's contact information.
+     */
+    public void setRecipient(String recipient) {
+        this.recipient = recipient;
+    }
+
+    /**
+     * Gets the summary or actual content of the message.
+     * 
+     * @return The summary or actual content of the message.
+     */
+    public String getMessageSummary() {
+        return messageSummary;
+    }
+
+    /**
+     * Sets the summary or actual content of the message.
+     * 
+     * @param messageSummary The summary or actual content of the message.
+     */
+    public void setMessageSummary(String messageSummary) {
+        this.messageSummary = messageSummary;
+    }
+
+    /**
+     * Gets the status of the communication attempt.
+     * 
+     * @return The status of the communication attempt.
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * Sets the status of the communication attempt.
+     * 
+     * @param status The status of the communication attempt.
+     */
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    /**
+     * Gets the complainant's preferred method of communication.
+     * 
+     * @return The preferred method of communication.
+     */
+    public String getPreferredContactMethod() {
+        return preferredContactMethod;
+    }
+
+    /**
+     * Sets the complainant's preferred method of communication.
+     * 
+     * @param preferredContactMethod The preferred method of communication.
+     */
+    public void setPreferredContactMethod(String preferredContactMethod) {
+        this.preferredContactMethod = preferredContactMethod;
+    }
+
+    // Constructors, hashCode, equals, and toString() methods can be implemented here as needed.
+}

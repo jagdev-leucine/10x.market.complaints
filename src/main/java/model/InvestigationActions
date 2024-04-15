@@ -1,0 +1,79 @@
+package model;
+
+import java.util.Date;
+
+/**
+ * Represents investigation actions in the system.
+ */
+public class InvestigationActions {
+    
+    /**
+     * Represents the unique identifier for an investigation action.
+     */
+    private long id;
+    
+    /**
+     * Represents the type of investigation action.
+     */
+    private InvestigationActionType type;
+    
+    /**
+     * Represents the date when the investigation action was initiated.
+     */
+    private Date initiationDate;
+    
+    /**
+     * Represents the staff member responsible for the investigation action.
+     */
+    private StaffMember responsibleStaffMember;
+    
+    // Getters and setters for the attributes
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public InvestigationActionType getType() {
+        return type;
+    }
+
+    public void setType(InvestigationActionType type) {
+        this.type = type;
+    }
+
+    public Date getInitiationDate() {
+        return initiationDate;
+    }
+
+    public void setInitiationDate(Date initiationDate) {
+        this.initiationDate = initiationDate;
+    }
+
+    public StaffMember getResponsibleStaffMember() {
+        return responsibleStaffMember;
+    }
+
+    public void setResponsibleStaffMember(StaffMember responsibleStaffMember) {
+        this.responsibleStaffMember = responsibleStaffMember;
+    }
+}
+
+/**
+ * Represents the type of investigation action.
+ */
+enum InvestigationActionType {
+    FOLLOW_UP,
+    INTERVIEW,
+    EVIDENCE_COLLECTION
+}
+
+/**
+ * Represents a staff member in the system.
+ */
+class StaffMember {
+    // properties and methods for the StaffMember class
+}

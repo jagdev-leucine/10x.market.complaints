@@ -1,0 +1,45 @@
+package model;
+
+import java.util.Date;
+
+/**
+ * Represents the RegulatorySubmissions entity.
+ */
+public class RegulatorySubmissions {
+  
+  /**
+   * Unique identifier for the Regulatory Submission.
+   */
+  private Long id;
+  
+  /**
+   * The type of the submission (e.g., New Drug Application, Biologics License Application).
+   */
+  private SubmissionType submissionType;
+  
+  /**
+   * Date when the submission was made.
+   */
+  private Date submissionDate;
+  
+  /**
+   * Reference to the StaffMember who submitted the regulatory documents.
+   */
+  private StaffMember submitter;
+  
+  /**
+   * Collection of DocumentUploads associated with the submission.
+   */
+  private List<DocumentUploads> documentUploads;
+  
+  // Getters and setters for the above attributes
+  
+  /**
+   * Enum representing the type of regulatory submission.
+   */
+  public enum SubmissionType {
+    NEW_DRUG_APPLICATION,
+    BIOLOGICS_LICENSE_APPLICATION
+    // Add more submission types if applicable
+  }
+}

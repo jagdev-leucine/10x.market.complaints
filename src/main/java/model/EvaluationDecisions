@@ -1,0 +1,109 @@
+package model;
+
+import java.util.Date;
+
+/**
+ * This class represents the EvaluationDecisions entity.
+ */
+public class EvaluationDecisions {
+    /**
+     * Unique identifier for the evaluation decision.
+     */
+    private long id;
+    
+    /**
+     * The decision made during the evaluation.
+     */
+    private DecisionType decisionType;
+    
+    /**
+     * The date and time when the decision was made.
+     */
+    private Date decisionDate;
+    
+    /**
+     * The evaluation associated with this decision.
+     */
+    private Evaluation evaluation;
+
+    /**
+     * Enumeration representing different types of decisions.
+     */
+    public enum DecisionType {
+        APPROVED,
+        REJECTED,
+        PENDING
+    }
+
+    /**
+     * Getter for id.
+     *
+     * @return The id of the evaluation decision.
+     */
+    public long getId() {
+        return id;
+    }
+
+    /**
+     * Setter for id.
+     *
+     * @param id The id of the evaluation decision.
+     */
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    /**
+     * Getter for decision type.
+     *
+     * @return The decision type.
+     */
+    public DecisionType getDecisionType() {
+        return decisionType;
+    }
+
+    /**
+     * Setter for decision type.
+     *
+     * @param decisionType The decision type.
+     */
+    public void setDecisionType(DecisionType decisionType) {
+        this.decisionType = decisionType;
+    }
+
+    /**
+     * Getter for decision date.
+     *
+     * @return The decision date.
+     */
+    public Date getDecisionDate() {
+        return decisionDate;
+    }
+
+    /**
+     * Setter for decision date.
+     *
+     * @param decisionDate The decision date.
+     */
+    public void setDecisionDate(Date decisionDate) {
+        this.decisionDate = decisionDate;
+    }
+
+    /**
+     * Getter for evaluation.
+     *
+     * @return The evaluation associated with the decision.
+     */
+    public Evaluation getEvaluation() {
+        return evaluation;
+    }
+
+    /**
+     * Setter for evaluation.
+     *
+     * @param evaluation The evaluation associated with the decision.
+     */
+    public void setEvaluation(Evaluation evaluation) {
+        this.evaluation = evaluation;
+    }
+}

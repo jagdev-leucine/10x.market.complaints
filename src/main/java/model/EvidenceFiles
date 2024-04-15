@@ -1,0 +1,71 @@
+package model;
+
+/**
+ * Represents the evidence files entity.
+ */
+public class EvidenceFiles {
+    /**
+     * Enumeration for the type of evidence file.
+     */
+    public enum EvidenceFileType {
+        PHOTO,
+        VIDEO,
+        DOCUMENT
+    }
+    
+    private Long fileId;
+    
+    /**
+     * Returns the file ID.
+     * @return The file ID.
+     */
+    public Long getFileId() {
+        return fileId;
+    }
+    
+    /**
+     * Sets the file ID.
+     * @param fileId The file ID to set.
+     */
+    public void setFileId(Long fileId) {
+        this.fileId = fileId;
+    }
+    
+    private String fileName;
+    
+    /**
+     * Returns the file name.
+     * @return The file name.
+     */
+    public String getFileName() {
+        return fileName;
+    }
+    
+    /**
+     * Sets the file name.
+     * @param fileName The file name to set.
+     */
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+    
+    private EvidenceFileType fileType;
+    
+    /**
+     * Returns the type of evidence file.
+     * @return The type of evidence file.
+     */
+    public EvidenceFileType getFileType() {
+        return fileType;
+    }
+    
+    /**
+     * Sets the type of evidence file.
+     * @param fileType The type of evidence file to set.
+     */
+    public void setFileType(EvidenceFileType fileType) {
+        this.fileType = fileType;
+    }
+    
+    // Other attributes and methods can be added here
+}

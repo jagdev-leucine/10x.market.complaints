@@ -1,0 +1,42 @@
+package model;
+
+/**
+ * This is the DocumentMetadata class which represents the metadata of a document.
+ */
+public class DocumentMetadata {
+
+    /**
+     * The unique identifier of the document.
+     */
+    private String documentId;
+
+    /**
+     * The name of the document.
+     */
+    private String documentName;
+
+    /**
+     * The type of the document (e.g., PDF, Word, etc.).
+     */
+    private DocumentType documentType;
+
+    /**
+     * The size of the document in bytes.
+     */
+    private long documentSize;
+
+    // Other attributes and methods
+
+    /**
+     * Enum representing the type of the document.
+     */
+    public enum DocumentType {
+        PDF,
+        WORD,
+        EXCEL,
+        POWERPOINT,
+        OTHER
+    }
+
+    // Getters and setters for the attributes
+}

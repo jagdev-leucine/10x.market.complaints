@@ -1,0 +1,58 @@
+package model;
+
+/**
+ * Class representing CapaCommunications entity.
+ */
+public class CapaCommunications {
+    private Long id; // Identifier for CapaCommunications
+    private String title; // Title of the communication
+    private CommunicationRecords communicationRecord; // Communication record associated with this communication
+
+    /**
+     * Get the identifier of the CapaCommunications.
+     * @return The identifier of the CapaCommunications.
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * Set the identifier of the CapaCommunications.
+     * @param id The identifier of the CapaCommunications.
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * Get the title of the communication.
+     * @return The title of the communication.
+     */
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * Set the title of the communication.
+     * @param title The title of the communication.
+     */
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    /**
+     * Get the communication record associated with this communication.
+     * @return The communication record associated with this communication.
+     */
+    public CommunicationRecords getCommunicationRecord() {
+        return communicationRecord;
+    }
+
+    /**
+     * Set the communication record associated with this communication.
+     * @param communicationRecord The communication record associated with this communication.
+     */
+    public void setCommunicationRecord(CommunicationRecords communicationRecord) {
+        this.communicationRecord = communicationRecord;
+    }
+}

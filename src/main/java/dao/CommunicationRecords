@@ -1,0 +1,343 @@
+package dao;
+
+
+import model.CommunicationRecords;
+import utils.DatabaseUtility;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import model.Complaint;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.sql.Date;
+
+
+
+public class CommunicationRecordsDAO {
+
+	
+	/**
+	 * Inserts a new complaint record into the database.
+	 * @param complaint The Complaint object containing all necessary details to be inserted.
+	 */
+	public boolean addComplaint(Complaint complaint) {
+	    Connection conn = DatabaseUtility.connect();
+	    boolean result = false;
+	    String sql = "INSERT INTO complaints (complaint_id, complainant_name, contact_email, contact_phone, product_name, batch_number, complaint_description, complaint_status, submission_date, resolution_date, fk_product_information_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	    try (PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+	        pstmt.setString(1, complaint.getComplaintId());
+	        pstmt.setString(2, complaint.getComplainantName());
+	        pstmt.setString(3, complaint.getContactEmail());
+	        pstmt.setString(4, complaint.getContactPhone());
+	        pstmt.setString(5, complaint.getProductName());
+	        pstmt.setString(6, complaint.getBatchNumber());
+	        pstmt.setString(7, complaint.getComplaintDescription());
+	        pstmt.setString(8, complaint.getComplaintStatus());
+	        pstmt.setDate(9, java.sql.Date.valueOf(complaint.getSubmissionDate()));
+	        if (complaint.getResolutionDate() != null) {
+	            pstmt.setDate(10, java.sql.Date.valueOf(complaint.getResolutionDate()));
+	        } else {
+	            pstmt.setDate(10, null);
+	        }
+	        pstmt.setInt(11, complaint.getFkProductInformationId());
+	        int affectedRows = pstmt.executeUpdate();
+	        if (affectedRows > 0) {
+	            result = true;
+	        }
+	    } catch (SQLException e) {
+	        Logger.getLogger(getClass().getName()).log(Level.SEVERE, "Error inserting complaint", e);
+	    } finally {
+	        DatabaseUtility.disconnect(conn);
+	    }
+	
+	    return result;
+	}
+	
+	/**
+	                    * Updates an existing complaint record in the database with new information.
+	                    * @param complaint The Complaint object containing the updated details.
+	                    */
+	                   public boolean updateComplaint(Complaint complaint) {
+	                       String query = "UPDATE complaints SET complainant_name = ?, contact_email = ?, contact_phone = ?, product_name = ?, batch_number = ?, complaint_description = ?, complaint_status = ?, submission_date = ?, resolution_date = ?, fk_product_information_id = ? WHERE id = ?;";
+	                       try (Connection conn = DatabaseUtility.connect()) {
+	                           PreparedStatement pstmt = conn.prepareStatement(query);
+	                           pstmt.setString(1, complaint.getComplainantName());
+	                           pstmt.setString(2, complaint.getContactEmail());
+	                           pstmt.setString(3, complaint.getContactPhone());
+	                           pstmt.setString(4, complaint.getProductName());
+	                           pstmt.setString(5, complaint.getBatchNumber());
+	                           pstmt.setString(6, complaint.getComplaintDescription());
+	                           pstmt.setString(7, complaint.getComplaintStatus());
+	                           pstmt.setDate(8, java.sql.Date.valueOf(complaint.getSubmissionDate()));
+	                           pstmt.setDate(9, complaint.getResolutionDate() != null ? java.sql.Date.valueOf(complaint.getResolutionDate()) : null);
+	                           pstmt.setInt(10, complaint.getFkProductInformationId());
+	                           pstmt.setLong(11, complaint.getId());
+	                           
+	                           int rowsAffected = pstmt.executeUpdate();
+	                           DatabaseUtility.disconnect(conn);
+	                           return rowsAffected > 0;
+	                       } catch (SQLException ex) {
+	                           Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+	                           return false;
+	                       }
+	                   }
+	
+	
+	/**
+	 * Deletes a specific complaint record from the database using its unique identifier.
+	 *
+	 * @param complaintId The unique identifier of the complaint to be deleted.
+	 */
+	public void deleteComplaintById(long complaintId) {
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    try {
+	        conn = DatabaseUtility.connect();
+	        String sql = "DELETE FROM complaints WHERE id = ?;";
+	        pstmt = conn.prepareStatement(sql);
+	        pstmt.setLong(1, complaintId);
+	        int affectedRows = pstmt.executeUpdate();
+	        if (affectedRows > 0) {
+	            System.out.println("A complaint with ID: " + complaintId + " was successfully deleted.");
+	        } else {
+	            System.out.println("No complaint found with ID: " + complaintId + ".");
+	        }
+	    } catch (SQLException ex) {
+	        Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+	    } finally {
+	        DatabaseUtility.disconnect(conn);
+	        if (pstmt != null) {
+	            try {
+	                pstmt.close();
+	            } catch (SQLException ex) {
+	                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+	            }
+	        }
+	    }
+	}
+	
+	
+	/**
+	 * Retrieves a specific complaint record from the database using its unique identifier.
+	 * @param complaintId The unique identifier of the complaint to be retrieved.
+	 * @return A Complaint object if found, null otherwise.
+	 */
+	public Complaint findComplaintById(long complaintId) {
+	  Connection conn = null;
+	  PreparedStatement pstmt = null;
+	  ResultSet rs = null;
+	  Complaint complaint = null;
+	
+	  try {
+	    conn = DatabaseUtility.connect();
+	    String sql = "SELECT * FROM complaints WHERE id = ?";
+	    pstmt = conn.prepareStatement(sql);
+	    pstmt.setLong(1, complaintId);
+	
+	    rs = pstmt.executeQuery();
+	
+	    if (rs.next()) {
+	      complaint = new Complaint();
+	      complaint.setId(rs.getLong("id"));
+	      complaint.setComplaintId(rs.getString("complaint_id"));
+	      complaint.setComplainantName(rs.getString("complainant_name"));
+	      complaint.setContactEmail(rs.getString("contact_email"));
+	      complaint.setContactPhone(rs.getString("contact_phone"));
+	      complaint.setProductName(rs.getString("product_name"));
+	      complaint.setBatchNumber(rs.getString("batch_number"));
+	      complaint.setComplaintDescription(rs.getString("complaint_description"));
+	      complaint.setComplaintStatus(rs.getString("complaint_status"));
+	      complaint.setSubmissionDate(rs.getDate("submission_date"));
+	      complaint.setResolutionDate(rs.getDate("resolution_date"));
+	    }
+	  } catch (SQLException ex) {
+	    Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+	  } finally {
+	    DatabaseUtility.disconnect(conn);
+	    if (pstmt != null) {
+	      try {
+	        pstmt.close();
+	      } catch (SQLException e) {
+	        Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
+	      }
+	    }
+	    if (rs != null) {
+	      try {
+	        rs.close();
+	      } catch (SQLException e) {
+	        Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
+	      }
+	    }
+	  }
+	  return complaint;
+	}
+	
+	/**
+	 * Retrieves all complaint records from the database.
+	 * @return a list of all complaints found in the database.
+	 */
+	public List<Complaint> findAllComplaints() {
+	    List<Complaint> complaints = new ArrayList<>();
+	    Connection conn = DatabaseUtility.connect();
+	    String sql = "SELECT * FROM complaints";
+	    try (Statement stmt = conn.createStatement();
+	         ResultSet rs = stmt.executeQuery(sql)) {
+	        while (rs.next()) {
+	            Complaint complaint = new Complaint();
+	            complaint.setId(rs.getLong("id"));
+	            complaint.setComplaintId(rs.getString("complaint_id"));
+	            complaint.setComplainantName(rs.getString("complainant_name"));
+	            complaint.setContactEmail(rs.getString("contact_email"));
+	            complaint.setContactPhone(rs.getString("contact_phone"));
+	            complaint.setProductName(rs.getString("product_name"));
+	            complaint.setBatchNumber(rs.getString("batch_number"));
+	            complaint.setComplaintDescription(rs.getString("complaint_description"));
+	            complaint.setComplaintStatus(rs.getString("complaint_status"));
+	            complaint.setSubmissionDate(rs.getDate("submission_date"));
+	            complaint.setResolutionDate(rs.getDate("resolution_date"));
+	            complaints.add(complaint);
+	        }
+	    } catch (SQLException e) {
+	        Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
+	    } finally {
+	        DatabaseUtility.disconnect(conn);
+	    }
+	
+	    return complaints;
+	}
+	
+	/**
+	 * Retrieves all complaints from the database that match a specific status.
+	 * @param status The status value to filter complaints by.
+	 * @return A list of Complaint objects that match the specified status.
+	 */
+	public List<Complaint> findComplaintsByStatus(String status) {
+	    List<Complaint> complaints = new ArrayList<>();
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    String sql = "SELECT * FROM complaints WHERE complaint_status = ?;";
+	    try {
+	        conn = DatabaseUtility.connect();
+	        pstmt = conn.prepareStatement(sql);
+	        pstmt.setString(1, status);
+	        rs = pstmt.executeQuery();
+	
+	        while (rs.next()) {
+	            Complaint complaint = new Complaint();
+	            complaint.setId(rs.getLong("id"));
+	            complaint.setComplaintId(rs.getString("complaint_id"));
+	            complaint.setComplainantName(rs.getString("complainant_name"));
+	            complaint.setContactEmail(rs.getString("contact_email"));
+	            complaint.setContactPhone(rs.getString("contact_phone"));
+	            complaint.setProductName(rs.getString("product_name"));
+	            complaint.setBatchNumber(rs.getString("batch_number"));
+	            complaint.setComplaintDescription(rs.getString("complaint_description"));
+	            complaint.setComplaintStatus(rs.getString("complaint_status"));
+	            complaint.setSubmissionDate(rs.getDate("submission_date"));
+	            complaint.setResolutionDate(rs.getDate("resolution_date"));
+	            complaints.add(complaint);
+	        }
+	    } catch (SQLException e) {
+	        Logger.getLogger(ComplaintDAO.class.getName()).log(Level.SEVERE, "Error retrieving complaints by status", e);
+	    } finally {
+	        DatabaseUtility.disconnect(conn);
+	        if (pstmt != null) try { pstmt.close(); } catch (SQLException e) { /* ignored */ }
+	        if (rs != null) try { rs.close(); } catch (SQLException e) { /* ignored */ }
+	    }
+	    return complaints;
+	}
+	
+	/**
+	 * Retrieves all complaints from the database that are categorized under a specific category.
+	 * @param category The category value to filter complaints by.
+	 * @return A list of Complaint objects that match the specified category.
+	 */
+	public List<Complaint> findComplaintsByCategory(String category) {
+	    List<Complaint> complaints = new ArrayList<>();
+	    Connection conn = DatabaseUtility.connect();
+	    PreparedStatement stmt = null;
+	    ResultSet rs = null;
+	    String sql = "SELECT * FROM complaints WHERE category = ?;";
+	    try {
+	        stmt = conn.prepareStatement(sql);
+	        stmt.setString(1, category);
+	        rs = stmt.executeQuery();
+	        while (rs.next()) {
+	            Complaint complaint = new Complaint();
+	            complaint.setId(rs.getLong("id"));
+	            complaint.setComplaintId(rs.getString("complaint_id"));
+	            complaint.setComplainantName(rs.getString("complainant_name"));
+	            complaint.setContactEmail(rs.getString("contact_email"));
+	            complaint.setContactPhone(rs.getString("contact_phone"));
+	            complaint.setProductName(rs.getString("product_name"));
+	            complaint.setBatchNumber(rs.getString("batch_number"));
+	            complaint.setComplaintDescription(rs.getString("complaint_description"));
+	            complaint.setComplaintStatus(rs.getString("complaint_status"));
+	            complaint.setSubmissionDate(rs.getDate("submission_date"));
+	            complaint.setResolutionDate(rs.getDate("resolution_date"));
+	            // Add more fields here as per your Complaint model
+	            complaints.add(complaint);
+	        }
+	    } catch (SQLException ex) {
+	        Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+	    } finally {
+	        DatabaseUtility.disconnect(conn);
+	        if (stmt != null) try { stmt.close(); } catch (SQLException e) { /* ignored */ }
+	        if (rs != null) try { rs.close(); } catch (SQLException e) { /* ignored */ }
+	    }
+	    return complaints;
+	}
+	
+	/**
+	 * Retrieves all complaints from the database that were submitted within a specified date range.
+	 * 
+	 * @param startDate The start of the date range for filtering complaints.
+	 * @param endDate The end of the date range for filtering complaints.
+	 * @return A list of Complaint objects that were submitted within the specified date range.
+	 */
+	public List<Complaint> findComplaintsByDateRange(Date startDate, Date endDate) {
+	    List<Complaint> complaints = new ArrayList<>();
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    String sql = "SELECT * FROM complaints WHERE submission_date BETWEEN ? AND ?";
+	    try {
+	        conn = DatabaseUtility.connect();
+	        pstmt = conn.prepareStatement(sql);
+	        pstmt.setDate(1, startDate);
+	        pstmt.setDate(2, endDate);
+	        rs = pstmt.executeQuery();
+	        while (rs.next()) {
+	            Complaint complaint = new Complaint();
+	            complaint.setId(rs.getLong("id"));
+	            complaint.setComplaintId(rs.getString("complaint_id"));
+	            complaint.setComplainantName(rs.getString("complainant_name"));
+	            complaint.setContactEmail(rs.getString("contact_email"));
+	            complaint.setContactPhone(rs.getString("contact_phone"));
+	            complaint.setProductName(rs.getString("product_name"));
+	            complaint.setBatchNumber(rs.getString("batch_number"));
+	            complaint.setComplaintDescription(rs.getString("complaint_description"));
+	            complaint.setComplaintStatus(rs.getString("complaint_status"));
+	            complaint.setSubmissionDate(rs.getDate("submission_date"));
+	            complaint.setResolutionDate(rs.getDate("resolution_date"));
+	            // Add more fields as necessary
+	            complaints.add(complaint);
+	        }
+	    } catch (SQLException ex) {
+	        Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+	    } finally {
+	        DatabaseUtility.disconnect(rs);
+	        DatabaseUtility.disconnect(pstmt);
+	        DatabaseUtility.disconnect(conn);
+	    }
+	    return complaints;
+	}
+	
+}

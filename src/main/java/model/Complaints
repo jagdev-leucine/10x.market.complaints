@@ -1,0 +1,92 @@
+package model;
+
+/**
+ * Represents a complaint entity.
+ */
+public class Complaints {
+    private long id; // Unique identifier for the complaint
+    private String description; // Description of the complaint
+    private ComplaintType type; // Type of the complaint
+    private StaffMember submittedBy; // Staff member who submitted the complaint
+    private InvestigationDetails investigationDetails; // Details of the investigation
+
+    /**
+     * Retrieves the unique identifier for the complaint.
+     * @return The unique identifier for the complaint.
+     */
+    public long getId() {
+        return id;
+    }
+
+    /**
+     * Sets the unique identifier for the complaint.
+     * @param id The unique identifier for the complaint.
+     */
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    /**
+     * Retrieves the description of the complaint.
+     * @return The description of the complaint.
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * Sets the description of the complaint.
+     * @param description The description of the complaint.
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
+     * Retrieves the type of the complaint.
+     * @return The type of the complaint.
+     */
+    public ComplaintType getType() {
+        return type;
+    }
+
+    /**
+     * Sets the type of the complaint.
+     * @param type The type of the complaint.
+     */
+    public void setType(ComplaintType type) {
+        this.type = type;
+    }
+
+    /**
+     * Retrieves the staff member who submitted the complaint.
+     * @return The staff member who submitted the complaint.
+     */
+    public StaffMember getSubmittedBy() {
+        return submittedBy;
+    }
+
+    /**
+     * Sets the staff member who submitted the complaint.
+     * @param submittedBy The staff member who submitted the complaint.
+     */
+    public void setSubmittedBy(StaffMember submittedBy) {
+        this.submittedBy = submittedBy;
+    }
+
+    /**
+     * Retrieves the details of the investigation for the complaint.
+     * @return The details of the investigation for the complaint.
+     */
+    public InvestigationDetails getInvestigationDetails() {
+        return investigationDetails;
+    }
+
+    /**
+     * Sets the details of the investigation for the complaint.
+     * @param investigationDetails The details of the investigation for the complaint.
+     */
+    public void setInvestigationDetails(InvestigationDetails investigationDetails) {
+        this.investigationDetails = investigationDetails;
+    }
+}

@@ -1,0 +1,55 @@
+package model;
+
+/**
+ * Class representing the ImprovementActions entity.
+ */
+public class ImprovementActions {
+    
+    /**
+     * Enum representing the type of improvement action.
+     */
+    public enum ActionType {
+        TYPE_1,
+        TYPE_2,
+        TYPE_3
+        // Add more types as necessary
+    }
+    
+    /**
+     * Enum representing the status of improvement action.
+     */
+    public enum ActionStatus {
+        OPEN,
+        IN_PROGRESS,
+        COMPLETED,
+        // Add more status as necessary
+    }
+
+    private Long id;
+    private String actionName;
+    private ActionType type;
+    private ActionStatus status;
+    private AuditTrails auditTrail; // Assuming AuditTrails is another entity
+
+    /**
+     * Get the ID of the improvement action.
+     * 
+     * @return The ID of the improvement action.
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * Set the ID of the improvement action.
+     * 
+     * @param id The ID of the improvement action.
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    // Include JavaDoc comments for other attributes as well
+
+    // Getters and Setters for other attributes omitted for brevity
+}

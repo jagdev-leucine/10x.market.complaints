@@ -1,0 +1,124 @@
+package model;
+
+import java.util.Date;
+
+/**
+ * Entity class representing the ComplaintLogs table in the database.
+ */
+public class ComplaintLogs {
+    
+    /**
+     * Unique identifier for the complaint log.
+     */
+    private Long id;
+
+    /**
+     * The related complaint for this log.
+     */
+    private Complaints complaint;
+
+    /**
+     * The date and time when the log was created.
+     */
+    private Date createdDate;
+
+    /**
+     * The user who created the log.
+     */
+    private StaffMembers createdBy;
+
+    /**
+     * The description or details of the log.
+     */
+    private String description;
+
+    /**
+     * Retrieves the unique identifier for the complaint log.
+     *
+     * @return The unique identifier.
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * Sets the unique identifier for the complaint log.
+     *
+     * @param id The unique identifier to set.
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * Retrieves the related complaint for this log.
+     *
+     * @return The related complaint.
+     */
+    public Complaints getComplaint() {
+        return complaint;
+    }
+
+    /**
+     * Sets the related complaint for this log.
+     *
+     * @param complaint The related complaint to set.
+     */
+    public void setComplaint(Complaints complaint) {
+        this.complaint = complaint;
+    }
+
+    /**
+     * Retrieves the date and time when the log was created.
+     *
+     * @return The created date of the log.
+     */
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    /**
+     * Sets the date and time when the log was created.
+     * 
+     * @param createdDate The created date to set.
+     */
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    /**
+     * Retrieves the user who created the log.
+     * 
+     * @return The user who created the log.
+     */
+    public StaffMembers getCreatedBy() {
+        return createdBy;
+    }
+
+    /**
+     * Sets the user who created the log.
+     * 
+     * @param createdBy The user who created the log.
+     */
+    public void setCreatedBy(StaffMembers createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    /**
+     * Retrieves the description or details of the log.
+     * 
+     * @return The description of the log.
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * Sets the description or details of the log.
+     * 
+     * @param description The description to set.
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+}
